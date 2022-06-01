@@ -1,0 +1,65 @@
+
+.table-rows{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 95%;
+    
+}
+
+.table-rows img{
+    cursor: pointer;
+}
+.table-rows>*{
+    margin-top: auto;
+    height: 5vh;
+    border: 1px solid;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+.modal-delete{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width:100%;
+    height: max-content;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    /* z-index: 1; */
+}
+.modal-delete *{
+    cursor: pointer;
+    width: max-content;
+    height: max-content;
+    color: #fff;
+    font-weight: bold;
+}
+
+
+.modal-delete .btn:hover {
+background-color: #fff;
+border: 2px solid #ea1d2c;
+}
+
+.modal-delete .btn:hover p{
+    color: #ea1d2c;
+}
+
+.modal-delete .confirm {
+    background-color: #2b9042;
+}
+  
+.modal-delete .confirm:hover {
+    background-color: #fff;
+    border: 2px solid #2b9042;
+}
+    
+.modal-delete .confirm:hover p {
+    color: #2b9042;
+}

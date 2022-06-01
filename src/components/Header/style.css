@@ -1,0 +1,28 @@
+.app-header {
+  height: 7vh;
+  background-color: #ea1d2c;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 2vh 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  z-index: 9;
+  align-items: center;
+}
+.app-header h3 {
+  color: #fff;
+  margin-left: 2vw;
+  font-size: 1.3rem;
+}
+.app-header button{
+    background-color: transparent;
+    border: none;
+}
+.app-header img {
+  width: 4vw;
+  height: 4vh;
+  margin-right: 2vh;
+  cursor: pointer;
+}

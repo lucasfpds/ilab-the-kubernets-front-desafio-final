@@ -1,0 +1,85 @@
+.container-modal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  gap: 2vh;
+  display: flex;
+  background: rgba(0, 0, 0,.9);
+  z-index: 9999;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.modal {
+  width: 50%;
+  gap: 1vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.modal>div{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.modal label {
+  font-size: 1.2rem;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden; 
+}
+.modal input{
+  font-size: 1.2rem;
+  margin-left: 1vw;
+  width: 65%;
+}
+
+.div-btns{
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+h2{
+  margin: 2vh 0;
+  font-size: 1.2rem;
+  color: #fff;
+}
+.div-btns .btn {
+  cursor: pointer;
+  width: 45%;
+  border: none;
+  margin-top: 1vh;
+}
+
+.div-btns .btn p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.div-btns .btn-modal-confirm {
+  background-color: #2b9042;
+}
+
+.div-btns .btn-modal-confirm:hover {
+    background-color: #fff;
+    border: 2px solid #2b9042;
+  }
+  
+  .div-btns .btn-modal-confirm:hover p {
+    color: #2b9042;
+  }
+.div-btns .btn-modal-cancel:hover {
+  background-color: #fff;
+  border: 2px solid #ea1d2c;
+}
+
+.div-btns .btn-modal-cancel:hover p{
+    color: #ea1d2c;
+  }
+  

@@ -1,0 +1,48 @@
+@font-face {
+  font-family: 'Sul Sans';
+  src: url('../assets/SulSans-Light.woff2') format('woff2'),
+    url('../assets/SulSans-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sul Sans';
+  src: url('../assets/SulSans-Medium.woff2') format('woff2'),
+    url('../assets/SulSans-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sul Sans';
+  src: url('../assets/SulSans-Regular.woff2') format('woff2'),
+    url('../assets/SulSans-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sul Sans';
+  src: url('../assets/SulSans-Bold.woff2') format('woff2'),
+    url('../assets/SulSans-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Sul Sans';
+  src: url('../assets/SulSans-BoldItalic.woff2') format('woff2'),
+    url('../assets/SulSans-BoldItalic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+*{
+  font-family: 'Sul Sans', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;
+}

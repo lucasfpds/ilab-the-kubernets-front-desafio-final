@@ -1,0 +1,36 @@
+.container-signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-y: scroll;
+  padding-top: 2vh;
+  overflow-y: scroll;
+  width: 100%;
+}
+.container-signup * {
+  margin: .6vh 0;
+}
+.container-signup .btn-aux {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.container-signup .btn-aux a {
+  text-decoration: none;
+  color: #EA1D2C;
+  font-weight: bold;
+}
+.container-signup .btn {
+  border: none;
+  cursor: pointer;
+  width: 40vw;
+}
+.container-signup .btn * {
+  color: #fff;
+  font-weight: bold;
+}
+.container-signup .btn:hover {
+  background-color: #a02331;
+}

@@ -1,0 +1,13 @@
+
+.btn {
+    width: 95%;
+    height: 40px;
+    background-color: #EA1D2C;
+    border-radius: 4px;
+}
+.btn>p{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

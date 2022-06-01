@@ -1,0 +1,37 @@
+.container-options{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1vh;
+
+}
+.container-options .btn {
+    border: none;
+    cursor: pointer;
+  }
+  .container-options .btn-users {
+    margin-top: 14vh;
+  }
+  .container-options .btn-users * {
+    color: #fff;
+    font-weight: bold;
+  }
+  .container-options .btn-users:hover {
+    background-color: #a02331;
+  }
+  .container-options .btn-orders {
+    background-color: #fff;
+    border: 2px solid #ea1d2c;
+  }
+  .container-options .btn-orders * {
+    color: #ea1d2c;
+    font-weight: bold;
+  }
+  .container-options .btn-orders:hover {
+    outline-color: #a02331;
+  }
+  .container-options .btn-orders:hover p {
+    color: #a02331;
+  }
+  
