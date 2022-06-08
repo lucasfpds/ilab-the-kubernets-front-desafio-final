@@ -13,7 +13,6 @@ import { useState } from "react";
 
 import useRequest from "../../hooks/useRequest";
 import toast from "../../helpers/toast";
-import imgLogin from "../../assets/login.png";
 import Button from "../../components/Button";
 
 export default function SignUp() {
@@ -74,7 +73,7 @@ export default function SignUp() {
       confirmacao_senha: valuesConfirm.password,
     };
 
-    const result = await post("/cadastrar-admin", body, false);
+    const result = await post("0/cadastrar-admin", body, false);
     if (result) {
       history.push("/login");
       toast.messageSuccess("Cadastro realizado com sucesso");

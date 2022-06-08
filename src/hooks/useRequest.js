@@ -55,28 +55,6 @@ export default function useRequest() {
     }
   }
 
-  async function postPedido(route, body, withToken) {
-    const config = withToken ? { Authorization: `${token}` } : {};
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_BE_URL}${route}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            ...config,
-          },
-          body: JSON.stringify(body),
-        }
-      );
-
-      return response;
-    } catch (error) {
-      console.log(error);
-      toast.messageError(error.message);
-    }
-  }
-
   async function put(route, body, withToken) {
     const config = withToken ? { Authorization: `${token}` } : {};
     try {
@@ -123,11 +101,36 @@ export default function useRequest() {
     }
   }
 
+  async function deleteRequest(route, withToken) {
+    const config = withToken ? { Authorization: `${token}` } : {};
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_BE_URL}${route}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            ...config,
+          },
+          body: null,
+        }
+      );
+      const dataObj = await response.json();
+      if (!response.ok) {
+        throw new Error(dataObj.message);
+      }
+      return dataObj;
+    } catch (error) {
+      console.log(error);
+      toast.messageError(error.message);
+    }
+  }
+
   return {
     get,
     post,
     put,
     patch,
-    postPedido,
+    deleteRequest,
   };
 }

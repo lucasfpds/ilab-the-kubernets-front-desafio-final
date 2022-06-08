@@ -1,43 +1,71 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable object-curly-newline */
 /* eslint-disable operator-linebreak */
-import { useEffect, useState } from "react";
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable object-curly-newline */
+import { useState } from "react";
 import editar from "../../assets/icons8-editar3.svg";
 import excluir from "../../assets/icons8-lixo1.svg";
-import { usuarios } from "../../utils/arrays";
 import useGlobal from "../../hooks/useGlobal";
-import Modal from "../Modal/Modal";
 import "./style.css";
+import Button from "../Button";
+import useRequest from "../../hooks/useRequest";
+import toast from "../../helpers/toast";
 
 export default function UsersRow(props) {
-  const { name, phone, email, cpf, birth_date, id } = props;
-  const { openModal, modalText, setOpenModal, userEdit, setUserEdit } =
+  const { name, telephone, email, cpf, birthDate, id } = props;
+  const { setUserEdit, setUsers, setModalUsr, setUsersFetched } =
     useGlobal();
+  const { deleteRequest, get } = useRequest();
 
   function handleEdit() {
-    setUserEdit({ name, phone, email, cpf, birth_date, id });
-    setOpenModal(true);
-    const object = usuarios.filter((user) => user.phone === phone);
-    console.log(object);
+    setUserEdit({
+      name,
+      telephone,
+      email,
+      cpf,
+      birthDate,
+      id,
+    });
+    setModalUsr(true);
   }
   const [modalDelete, setModalDelete] = useState(false);
 
   function handleDelete(param) {
+    if (param) {
+      deleteRequest(`0/delete/${param}`).then((response) => {
+        if (response) {
+          get("0/read").then((res) => {
+            setUsers(res);
+            setUsersFetched(res);
+          });
+          toast.messageSuccess("Usuário excluído com sucesso!");
+        }
+      });
+    }
     console.log(param);
     setModalDelete(false);
   }
   return (
     <div className="table-rows">
-      <p style={{ width: "25%" }}>{name}</p>
-      <p style={{ width: "10%" }}>{cpf}</p>
-      <p style={{ width: "25%" }}>{email}</p>
-      <p style={{ width: "10%" }}>{phone}</p>
-      <p style={{ width: "16%" }}>{birth_date}</p>
+      <div style={{ width: "25%" }}>
+        <p>{name}</p>
+      </div>
+      <div style={{ width: "12.5%" }}>
+        <p>{cpf}</p>
+      </div>
+      <div style={{ width: "20%" }}>
+        <p>{email}</p>
+      </div>
+      <div style={{ width: "12.5%" }}>
+        <p>{telephone}</p>
+      </div>
+      <div style={{ width: "16%" }}>
+        <p>{birthDate}</p>
+      </div>
       <button style={{ width: "7%" }}>
         <img onClick={() => handleEdit()} src={editar} alt="editar" />
       </button>
-      <button style={{ width: "7%" }}>
+      <div style={{ width: "7%", padding: "0" }}>
         <img
           onClick={() => setModalDelete(true)}
           style={{ display: !modalDelete ? "initial" : "none" }}
@@ -48,14 +76,18 @@ export default function UsersRow(props) {
           className="modal-delete"
           style={{ display: modalDelete ? "flex" : "none" }}
         >
-          <button className="confirm btn">
-            <p onClick={() => handleDelete(id)}>Sim</p>
-          </button>
-          <button className="btn">
-            <p onClick={() => setModalDelete(false)}>Não</p>
-          </button>
+          <Button
+            onClickProp={() => handleDelete(id)}
+            clsName="confirm btn"
+            text="Sim"
+          />
+          <Button
+            className="btn"
+            onClickProp={() => setModalDelete(false)}
+            text="Não"
+          />
         </div>
-      </button>
+      </div>
     </div>
   );
 }

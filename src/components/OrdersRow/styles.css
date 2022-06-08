@@ -1,0 +1,17 @@
+.over{
+    display: none;
+}
+
+.table-rows>div:hover .over{
+    display: flex;
+    z-index: 9;
+    white-space: normal;
+    overflow: visible; 
+    background-color: rgb(000, 000, 000, 1) ;
+    color: #fff;
+    padding: .5rem;
+}
+
+.table-rows>div:hover .without-over{
+    display: none;
+}

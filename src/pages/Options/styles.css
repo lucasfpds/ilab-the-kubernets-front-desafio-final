@@ -9,6 +9,7 @@
 .container-options .btn {
     border: none;
     cursor: pointer;
+    padding: 0 .7rem;
   }
   .container-options .btn-users {
     margin-top: 14vh;

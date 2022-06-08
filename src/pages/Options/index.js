@@ -18,7 +18,6 @@ export default function Options() {
   }
   return (
     <div className="container-options">
-      <h1>Options</h1>
       <Button
         onClickProp={() => handleChangePage("users")}
         text="Usuarios"

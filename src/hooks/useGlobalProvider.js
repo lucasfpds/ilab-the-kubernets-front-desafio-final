@@ -1,17 +1,27 @@
 /* eslint-disable operator-linebreak */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useLocalStorage } from "react-use";
-import { useLocation, useHistory } from "react-router-dom";
-import { usuarios } from "../utils/arrays";
 
 function useGlobalProvider() {
-  const history = useHistory();
   const [token, setToken, removeToken] = useLocalStorage("token", "");
   const [header, setHeader] = useState(true);
-  const [openModal, setOpenModal] = useState(false);
-  const [users, setUsers] = useState(usuarios);
-  const [userEdit, setUserEdit] = useState({});
+  const [users, setUsers] = useState([]);
+  const [usersFetched, setUsersFetched] = useState([]);
+  const [modalMsg, setModalMsg] = useState(false);
+  const [modalUsr, setModalUsr] = useState(false);
+  const orderRef = useRef({});
+  const [userEdit, setUserEdit] = useState({
+    name: "",
+    telephone: "",
+    email: "",
+    cpf: "",
+    birthDate: "",
+    id: "",
+  });
+
+  const [orders, setOrders] = useState([]);
+  const [ordersFetched, setOrdersFetched] = useState([]);
 
   return {
     token,
@@ -19,12 +29,21 @@ function useGlobalProvider() {
     removeToken,
     header,
     setHeader,
-    openModal,
-    setOpenModal,
     users,
     setUsers,
     userEdit,
     setUserEdit,
+    orders,
+    setOrders,
+    modalMsg,
+    setModalMsg,
+    orderRef,
+    modalUsr,
+    setModalUsr,
+    usersFetched,
+    setUsersFetched,
+    ordersFetched,
+    setOrdersFetched,
   };
 }
 

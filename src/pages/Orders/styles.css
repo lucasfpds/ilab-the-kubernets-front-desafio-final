@@ -1,32 +1,12 @@
-.container-users{
+.container-orders{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
 }
- .div-search{
-    margin: 1vh 0;
-}
-.table-title{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 95%;
-    padding-right: 15px;
 
-}
-.table-title>*{
-    border: 1px solid;
-    font-size: 1rem;
-    white-space: nowrap;
-    overflow: hidden; 
-    text-overflow: ellipsis;
-    text-align: center;
-}
-
-.btn-create-user{
+.btn-create-order{
     margin: 2vh 0;
     cursor: pointer;
     width: max-content;
@@ -34,24 +14,19 @@
     background-color: #EA1D2C;
 }
 
-.container-rows{
-    width: 95%;
-    height: 60vh;
-    overflow-y: scroll;
-}
 
-.btn-create-user  p{
+.btn-create-order  p{
     padding: .3rem;
     font-weight: bold;
     color: #fff;
 }
 
-.btn-create-user:hover {
+.btn-create-order:hover {
     background-color: #fff;
     border: 2px solid #ea1d2c;
   }
   
-  .btn-create-user:hover p{
+  .btn-create-order:hover p{
       color: #ea1d2c;
     }
   

@@ -9,7 +9,6 @@ import {
 import { GlobalProvider } from "./context/GlobalContext";
 import useGlobal from "./hooks/useGlobal";
 import Header from "./components/Header";
-import Modal from "./components/Modal/Modal";
 import Home from "./pages/Home";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -26,12 +25,12 @@ export default function Routes(params) {
           <Route path="/login" component={SignIn} />
           <Route path="/cadastrar" component={SignUp} />
           <ProtectedRoute>
-            <Route path="/options" component={Options} />
-            <Route path="/usuarios" component={Users} />
-            <Route path="/pedidos" component={Orders} />
+            <Route path="/options" exact component={Options} />
+            <Route path="/usuarios" exact component={Users} />
+            <Route path="/pedidos" exact component={Orders} />
             <Header />
           </ProtectedRoute>
-          <Modal />
+          {/* <Modal /> */}
         </GlobalProvider>
       </Switch>
     </Router>

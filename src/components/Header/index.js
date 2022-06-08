@@ -6,7 +6,7 @@ import signOut from "../../assets/sign-out.svg";
 import useGlobal from "../../hooks/useGlobal";
 
 export default function Header(props) {
-  const { removeToken, nomeEntregador, token } = useGlobal();
+  const { removeToken, token } = useGlobal();
   const history = useHistory();
   function handleSignOut() {
     removeToken();
