@@ -54,8 +54,13 @@ export default function Orders() {
       .then((usersResponse) => usersResponse)
       .then((usersResponse) => {
         get("1/orders").then((ordersResponse) => {
-          setUsers(usersResponse);
-          setUsersFetched(usersResponse);
+          if (Array.isArray(usersResponse)) {
+            setUsers(usersResponse);
+            setUsersFetched(usersResponse);
+          } else {
+            setUsers([]);
+            setUsersFetched([]);
+          }
           console.log(ordersResponse);
           setOrders(ordersResponse);
           setOrdersFetched(ordersResponse);
@@ -65,7 +70,7 @@ export default function Orders() {
 
   function findUser(id) {
     const user = users.filter((u) => u.id === id);
-    return user[0].name;
+    return user[0] ? user[0].name : "Não encontrado";
   }
 
   function dateFormated(date) {
@@ -112,19 +117,23 @@ export default function Orders() {
         </div>
       </div>
 
-      <div className="container-rows">
-        {orders.map((order) => (
-          <OrdersRow
-            key={order.idOrder}
-            id={order.idOrder}
-            user={findUser(order.idUser)}
-            total_value={order.totalValue}
-            description={order.description}
-            date={order.ordersDate}
-            status={order.status}
-          />
-        ))}
-      </div>
+      {orders[0] ? (
+        <div className="container-rows">
+          {orders.map((order) => (
+            <OrdersRow
+              key={order.idOrder}
+              id={order.idOrder}
+              user={findUser(order.idUser)}
+              total_value={order.totalValue}
+              description={order.description}
+              date={order.ordersDate}
+              status={order.status}
+            />
+          ))}
+        </div>
+      ) : (
+        <h1>Nenhuma Ordem Cadastrada</h1>
+      )}
       <Button
         onClickProp={() => history.push("/options")}
         clsName="btn btn-prev"

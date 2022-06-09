@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 import useGlobal from "./useGlobal";
 import toast from "../helpers/toast";
 
@@ -25,8 +26,10 @@ export default function useRequest() {
       return dataObj;
     } catch (error) {
       console.log(error);
-      toast.messageError(error.message);
+      !error.message.includes("Unexpected end of JSON input") &&
+        toast.messageError(error.message);
     }
+    return [];
   }
 
   async function post(route, body, withToken) {
@@ -43,16 +46,18 @@ export default function useRequest() {
           body: JSON.stringify(body),
         }
       );
-      const dataObj = await response.json();
 
-      if (!response.ok) {
+      const dataObj = await response.json();
+      if (!response.ok && response.status > 400) {
         throw new Error(dataObj.message);
       }
-      return dataObj;
+      return { status: response.ok };
     } catch (error) {
       console.log(error);
-      toast.messageError(error.message);
+      !error.message.includes("Unexpected end of JSON input") &&
+        toast.messageError(error.message);
     }
+    return [];
   }
 
   async function put(route, body, withToken) {
@@ -70,31 +75,11 @@ export default function useRequest() {
         }
       );
       const dataObj = await response.json();
+      console.log(dataObj);
       if (!response.ok) {
         throw new Error(dataObj.message);
       }
-      return dataObj;
-    } catch (error) {
-      console.log(error);
-      toast.messageError(error.message);
-    }
-  }
-
-  async function patch(route, body, withToken) {
-    const config = withToken ? { Authorization: `${token}` } : {};
-    try {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_BE_URL}${route}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            ...config,
-          },
-          body: JSON.stringify(body),
-        }
-      );
-      return response;
+      return { ...dataObj, status: response.ok };
     } catch (error) {
       console.log(error);
       toast.messageError(error.message);
@@ -115,11 +100,11 @@ export default function useRequest() {
           body: null,
         }
       );
-      const dataObj = await response.json();
       if (!response.ok) {
+        const dataObj = await response.json();
         throw new Error(dataObj.message);
       }
-      return dataObj;
+      return { status: response.ok };
     } catch (error) {
       console.log(error);
       toast.messageError(error.message);
@@ -130,7 +115,6 @@ export default function useRequest() {
     get,
     post,
     put,
-    patch,
     deleteRequest,
   };
 }

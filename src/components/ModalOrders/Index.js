@@ -37,7 +37,7 @@ export default function ModalOrders(props) {
           totalValue: formatCurrency(total_value),
           description,
         }).then((response) => {
-          if (response.idOrder) {
+          if (response) {
             toast.messageSuccess("Pedido criado com sucesso!");
             setShowModal(false);
             setUser("");

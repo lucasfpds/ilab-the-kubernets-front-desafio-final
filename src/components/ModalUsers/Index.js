@@ -9,7 +9,7 @@ import toast from "../../helpers/toast";
 import "./style.css";
 
 export default function ModalUsers(props) {
-  const { userEdit, setUsers, users, modalUsr, setModalUsr, setUsersFetched } =
+  const { userEdit, setUsers, modalUsr, setModalUsr, setUsersFetched } =
     useGlobal();
   const { name, telephone, email, cpf, birthDate, id } = userEdit;
 
@@ -60,18 +60,24 @@ export default function ModalUsers(props) {
         toast.messageError("Preencha todos os campos!");
       } else {
         if (idInput) {
-          put("0/update", body, null).then((response) => {
-            get("0/read").then((res) => {
-              setUsers(res);
-              setUsersFetched(res);
-            });
-            toast.messageSuccess("Usuário atualizado com sucesso!");
+          put(`0/update/${body.id}`, body, null).then((response) => {
+            if (response.status) {
+              get("0/read").then((res) => {
+                setUsers(res);
+                setUsersFetched(res);
+              });
+              toast.messageSuccess("Usuário atualizado com sucesso!");
+            }
           });
         } else {
           post("0/create/", body, null).then((response) => {
-            setUsers([...users, response]);
-            setUsersFetched([...users, response]);
-            toast.messageSuccess("Usuário criado com sucesso!");
+            if (response.status) {
+              get("0/read").then((res) => {
+                setUsers(res);
+                setUsersFetched(res);
+              });
+              toast.messageSuccess("Usuário criado com sucesso!");
+            }
           });
         }
         setModalUsr(false);

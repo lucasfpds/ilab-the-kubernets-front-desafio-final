@@ -84,20 +84,23 @@ export default function Users() {
           <h3 style={{ width: "7%" }}>Excluir</h3>
         </div>
       </div>
-
-      <div className="container-rows">
-        {users.map((user) => (
-          <UsersRow
-            key={user.id}
-            name={user.name}
-            telephone={user.telephone}
-            email={user.email}
-            cpf={user.cpf}
-            birthDate={user.birthDate}
-            id={user.id}
-          />
-        ))}
-      </div>
+      {users[0] ? (
+        <div className="container-rows">
+          {users.map((user) => (
+            <UsersRow
+              key={user.id}
+              name={user.name}
+              telephone={user.telephone}
+              email={user.email}
+              cpf={user.cpf}
+              birthDate={user.birthDate}
+              id={user.id}
+            />
+          ))}
+        </div>
+      ) : (
+        <h1>Não há usuários cadastrados</h1>
+      )}
       <Button
         onClickProp={() => history.push("/options")}
         clsName="btn btn-prev"
