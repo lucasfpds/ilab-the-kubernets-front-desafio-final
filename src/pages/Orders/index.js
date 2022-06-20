@@ -23,6 +23,8 @@ export default function Orders() {
     setUsers,
     setUsersFetched,
     users,
+    noContent,
+    setNoContent,
   } = useGlobal();
 
   const [showModal, setShowModal] = useState(false);
@@ -30,7 +32,7 @@ export default function Orders() {
   const { get } = useRequest();
 
   function handleSearch(input) {
-    const value = input;
+    const value = input.toLowerCase();
 
     const ordersFiltered = ordersFetched.filter(
       (o) =>
@@ -46,14 +48,15 @@ export default function Orders() {
   }
 
   useEffect(() => {
+    setNoContent("Aguarde...");
     handleSearch(orderSearch);
   }, [orderSearch]);
 
   useEffect(() => {
-    get("0/read")
+    get("1/read")
       .then((usersResponse) => usersResponse)
       .then((usersResponse) => {
-        get("1/orders").then((ordersResponse) => {
+        get("2/orders").then((ordersResponse) => {
           if (Array.isArray(usersResponse)) {
             setUsers(usersResponse);
             setUsersFetched(usersResponse);
@@ -62,6 +65,8 @@ export default function Orders() {
             setUsersFetched([]);
           }
           console.log(ordersResponse);
+          ordersResponse.length === 0 &&
+            setNoContent("Nenhum pedido encontrado");
           setOrders(ordersResponse);
           setOrdersFetched(ordersResponse);
         });
@@ -109,11 +114,12 @@ export default function Orders() {
           />
         </div>
         <div className="table-title">
-          <h3 style={{ width: "32%" }}>Usuario</h3>
-          <h3 style={{ width: "12%" }}>Valor Total</h3>
+          <h3 style={{ width: "28%" }}>Usuario</h3>
+          <h3 style={{ width: "11%" }}>Valor Total</h3>
           <h3 style={{ width: "32%" }}>Descrição</h3>
-          <h3 style={{ width: "12%" }}>Data do Pedido</h3>
-          <h3 style={{ width: "12%" }}>Status</h3>
+          <h3 style={{ width: "9%" }}>Data do Pedido</h3>
+          <h3 style={{ width: "9%" }}>Status</h3>
+          <h3 style={{ width: "11%" }}>Mensageria</h3>
         </div>
       </div>
 
@@ -128,11 +134,12 @@ export default function Orders() {
               description={order.description}
               date={order.ordersDate}
               status={order.status}
+              statusEmail={order.statusEmail}
             />
           ))}
         </div>
       ) : (
-        <h1>Nenhuma Ordem Cadastrada</h1>
+        <h1>{noContent}</h1>
       )}
       <Button
         onClickProp={() => history.push("/options")}

@@ -5,11 +5,12 @@ import { useLocalStorage } from "react-use";
 
 function useGlobalProvider() {
   const [token, setToken, removeToken] = useLocalStorage("token", "");
-  const [header, setHeader] = useState(true);
   const [users, setUsers] = useState([]);
+  const [admin, setAdmin] = useState({ id: 1, name: "" });
   const [usersFetched, setUsersFetched] = useState([]);
   const [modalMsg, setModalMsg] = useState(false);
   const [modalUsr, setModalUsr] = useState(false);
+  const [noContent, setNoContent] = useState(false);
   const orderRef = useRef({});
   const [userEdit, setUserEdit] = useState({
     name: "",
@@ -22,13 +23,13 @@ function useGlobalProvider() {
 
   const [orders, setOrders] = useState([]);
   const [ordersFetched, setOrdersFetched] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const loadingRef = useRef(false);
 
   return {
     token,
     setToken,
     removeToken,
-    header,
-    setHeader,
     users,
     setUsers,
     userEdit,
@@ -44,6 +45,13 @@ function useGlobalProvider() {
     setUsersFetched,
     ordersFetched,
     setOrdersFetched,
+    loading,
+    setLoading,
+    loadingRef,
+    admin,
+    setAdmin,
+    noContent,
+    setNoContent,
   };
 }
 

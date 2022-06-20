@@ -29,7 +29,7 @@ export default function SignUp() {
   });
 
   const [email, setEmail] = useState("");
-  const [nome, setNome] = useState("");
+  const [name, setName] = useState("");
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -57,7 +57,7 @@ export default function SignUp() {
   };
 
   async function handleSubmit() {
-    if (!values.password || !email || !nome || !valuesConfirm.password) {
+    if (!values.password || !email || !name || !valuesConfirm.password) {
       return toast.messageError("Preencha todos os campos");
     }
     if (values.password !== valuesConfirm.password) {
@@ -68,16 +68,17 @@ export default function SignUp() {
     }
     const body = {
       email,
-      nome,
-      senha: values.password,
-      confirmacao_senha: valuesConfirm.password,
+      name,
+      password: values.password,
     };
-
-    const result = await post("0/cadastrar-admin", body, false);
-    if (result) {
-      history.push("/login");
-      toast.messageSuccess("Cadastro realizado com sucesso");
-    }
+    console.log(body);
+    // eslint-disable-next-line no-unused-vars
+    const result = await post("0/create", body, false).then((res) => {
+      if (res.status) {
+        toast.messageSuccess("Usuário criado com sucesso");
+        history.push("/login");
+      }
+    });
   }
   return (
     <div className="container-signup">
@@ -87,7 +88,7 @@ export default function SignUp() {
         label="Nome"
         variant="outlined"
         sx={{ width: "40%" }}
-        onChange={(event) => setNome(event.target.value)}
+        onChange={(event) => setName(event.target.value)}
       />
       <TextField
         size="small"

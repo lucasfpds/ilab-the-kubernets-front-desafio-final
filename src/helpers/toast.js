@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 function messageError(message) {
   toast.error(message, {
     position: "top-center",
-    autoClose: 3000,
+    autoClose: 2000,
     closeOnClick: true,
     pauseOnHover: false,
     theme: "colored",
@@ -14,7 +14,7 @@ function messageError(message) {
 function messageSuccess(message) {
   toast.success(message, {
     position: "top-center",
-    autoClose: 5000,
+    autoClose: 2000,
     closeOnClick: true,
     pauseOnHover: false,
     theme: "colored",

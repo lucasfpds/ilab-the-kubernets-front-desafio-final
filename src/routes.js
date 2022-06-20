@@ -15,6 +15,7 @@ import SignUp from "./pages/SignUp";
 import Options from "./pages/Options";
 import Users from "./pages/Users";
 import Orders from "./pages/Orders";
+import CircularIndeterminate from "./utils/CircularIndeterminate";
 
 export default function Routes(params) {
   return (
@@ -31,6 +32,7 @@ export default function Routes(params) {
             <Header />
           </ProtectedRoute>
           {/* <Modal /> */}
+          <CircularIndeterminate />
         </GlobalProvider>
       </Switch>
     </Router>

@@ -6,7 +6,7 @@ export default function useRequest() {
   const { token } = useGlobal();
 
   async function get(route, withToken) {
-    const config = withToken ? { Authorization: `${token}` } : {};
+    const config = withToken ? { Authorization: `Bearer ${token}` } : {};
     try {
       const response = await fetch(
         `${process.env.REACT_APP_API_BE_URL}${route}`,
@@ -33,7 +33,7 @@ export default function useRequest() {
   }
 
   async function post(route, body, withToken) {
-    const config = withToken ? { Authorization: `${token}` } : {};
+    const config = withToken ? { Authorization: `Bearer ${token}` } : {};
     try {
       const response = await fetch(
         `${process.env.REACT_APP_API_BE_URL}${route}`,
@@ -48,10 +48,10 @@ export default function useRequest() {
       );
 
       const dataObj = await response.json();
-      if (!response.ok && response.status > 400) {
+      if (!response.ok && response.status >= 300) {
         throw new Error(dataObj.message);
       }
-      return { status: response.ok };
+      return { status: response.ok, ...dataObj };
     } catch (error) {
       console.log(error);
       !error.message.includes("Unexpected end of JSON input") &&
@@ -61,7 +61,7 @@ export default function useRequest() {
   }
 
   async function put(route, body, withToken) {
-    const config = withToken ? { Authorization: `${token}` } : {};
+    const config = withToken ? { Authorization: `Bearer ${token}` } : {};
     try {
       const response = await fetch(
         `${process.env.REACT_APP_API_BE_URL}${route}`,
@@ -87,7 +87,7 @@ export default function useRequest() {
   }
 
   async function deleteRequest(route, withToken) {
-    const config = withToken ? { Authorization: `${token}` } : {};
+    const config = withToken ? { Authorization: `Bearer ${token}` } : {};
     try {
       const response = await fetch(
         `${process.env.REACT_APP_API_BE_URL}${route}`,

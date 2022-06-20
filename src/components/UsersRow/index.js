@@ -31,9 +31,9 @@ export default function UsersRow(props) {
 
   function handleDelete(param) {
     if (param) {
-      deleteRequest(`0/delete/${param}`).then((response) => {
+      deleteRequest(`1/delete/${param}`).then((response) => {
         if (response) {
-          get("0/read").then((res) => {
+          get("1/read").then((res) => {
             if (Array.isArray(res)) {
               setUsers(res);
               setUsersFetched(res);

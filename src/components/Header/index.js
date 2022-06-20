@@ -6,17 +6,16 @@ import signOut from "../../assets/sign-out.svg";
 import useGlobal from "../../hooks/useGlobal";
 
 export default function Header(props) {
-  const { removeToken, token } = useGlobal();
+  const { removeToken, token, admin } = useGlobal();
   const history = useHistory();
   function handleSignOut() {
     removeToken();
-
     history.push("/login");
   }
 
   return (
     <header style={{ display: token ? "flex" : "none" }} className="app-header">
-      <h3>Olá fulano!</h3>
+      <h3>Olá {admin.name}!</h3>
       <button onClick={handleSignOut}>
         <img src={signOut} alt="Sair" />
       </button>

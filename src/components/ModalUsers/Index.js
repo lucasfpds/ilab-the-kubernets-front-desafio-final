@@ -49,6 +49,7 @@ export default function ModalUsers(props) {
   };
 
   function handleClick(params) {
+    console.log(body);
     if (params === "confirm") {
       if (
         !nameInput ||
@@ -60,9 +61,9 @@ export default function ModalUsers(props) {
         toast.messageError("Preencha todos os campos!");
       } else {
         if (idInput) {
-          put(`0/update/${body.id}`, body, null).then((response) => {
+          put(`1/update/${body.id}`, body, null).then((response) => {
             if (response.status) {
-              get("0/read").then((res) => {
+              get("1/read").then((res) => {
                 setUsers(res);
                 setUsersFetched(res);
               });
@@ -70,9 +71,9 @@ export default function ModalUsers(props) {
             }
           });
         } else {
-          post("0/create/", body, null).then((response) => {
+          post("1/create/", body, null).then((response) => {
             if (response.status) {
-              get("0/read").then((res) => {
+              get("1/read").then((res) => {
                 setUsers(res);
                 setUsersFetched(res);
               });

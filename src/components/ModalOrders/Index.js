@@ -10,7 +10,8 @@ import "./style.css";
 import toast from "../../helpers/toast";
 
 export default function ModalOrders(props) {
-  const { users, setOrders, setOrdersFetched } = useGlobal();
+  const { users, setOrders, setOrdersFetched, setLoading, loadingRef, admin } =
+    useGlobal();
   const { showModal, setShowModal } = props;
 
   const [user, setUser] = useState("");
@@ -32,24 +33,40 @@ export default function ModalOrders(props) {
       } else if (isNaN(formatCurrency(total_value))) {
         toast.messageError("Preencha o valor corretamente!");
       } else {
-        post("1/create-order", {
+        setLoading(true);
+        loadingRef.current = true;
+        post("2/create-order", {
+          idAdmin: admin.id,
           idUser: Number(user),
           totalValue: formatCurrency(total_value),
           description,
         }).then((response) => {
-          if (response) {
-            toast.messageSuccess("Pedido criado com sucesso!");
+          if (response.status === "aberto") {
+            setLoading(false);
+            loadingRef.current = false;
+            toast.messageError("Erro ao criar pedido! TENTE NOVAMENTE!");
+          } else if (response.status) {
             setShowModal(false);
             setUser("");
             setTotal_value("");
             setDescription("");
-            get("1/orders").then((ordersResponse) => {
+            get("2/orders").then((ordersResponse) => {
               console.log(ordersResponse);
               setOrders(ordersResponse);
               setOrdersFetched(ordersResponse);
+              setLoading(false);
+              loadingRef.current = false;
+              toast.messageSuccess("Pedido criado com sucesso!");
             });
           }
         });
+        setTimeout(() => {
+          if (loadingRef.current) {
+            setLoading(false);
+            loadingRef.current = false;
+            toast.messageError("Erro ao criar pedido!");
+          }
+        }, 30000);
       }
     } else {
       setUser("");

@@ -11,13 +11,15 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useState } from "react";
 import useGlobal from "../../hooks/useGlobal";
+import useRequest from "../../hooks/useRequest";
 
 import toast from "../../helpers/toast";
 import Button from "../../components/Button";
 
 export default function SignIn() {
   const history = useHistory();
-  const { setToken } = useGlobal();
+  const { setToken, setAdmin } = useGlobal();
+  const { post } = useRequest();
 
   const [values, setValues] = useState({
     password: "",
@@ -43,8 +45,13 @@ export default function SignIn() {
     if (!values.password || !email) {
       return toast.messageError("Preencha todos os campos");
     }
-    setToken(true);
-    history.push("/options");
+    await post("0/login", { email, password: values.password }, false).then(
+      (response) => {
+        setToken(response.token);
+        setAdmin({ id: response.id, name: "" });
+        history.push("/options");
+      }
+    );
   }
   return (
     <div className="container-login">

@@ -3,7 +3,7 @@
 import "./styles.css";
 
 export default function OrdersRow(props) {
-  const { user, total_value, description, date, status } = props;
+  const { user, total_value, description, date, status, statusEmail } = props;
 
   const newTotalValue = () => {
     const newValue = String(total_value / 100);
@@ -28,21 +28,24 @@ export default function OrdersRow(props) {
 
   return (
     <div className="table-rows">
-      <div style={{ width: "32%" }}>
+      <div style={{ width: "28%" }}>
         <p>{user}</p>
       </div>
-      <div style={{ width: "12%" }}>
+      <div style={{ width: "11%" }}>
         <p>R$ {newTotalValue()} </p>
       </div>
       <div style={{ width: "32%" }}>
         <p className="without-over">{description}</p>
         <p className="over">{description}</p>
       </div>
-      <div style={{ width: "12%" }}>
+      <div style={{ width: "9%" }}>
         <p>{dateFormated()}</p>
       </div>
-      <div style={{ width: "12%" }}>
+      <div style={{ width: "9%" }}>
         <p>{status}</p>
+      </div>
+      <div style={{ width: "11%" }}>
+        <p>{statusEmail}</p>
       </div>
     </div>
   );
