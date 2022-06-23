@@ -93,9 +93,9 @@ $ cp .env.example .env
 
 | Key                     | Description    | Default Value  |
 | ----------------------- | -------------- | -------------- |
-| REACT_APP_API_ADMIN_URL | URL API ADMIN  | usuario        |
-| REACT_APP_API_USER_URL  | URL API USERS  | localhost      |
-| REACT_APP_API_ORDER_URL | URL API ORDERS | banco_de_dados |
+| REACT_APP_API_ADMIN_URL | URL API ADMIN  | localhost:8080 |
+| REACT_APP_API_USER_URL  | URL API USERS  | localhost:8081 |
+| REACT_APP_API_ORDER_URL | URL API ORDERS | localhost:8082 |
 
 <br/>
 <hr/>
