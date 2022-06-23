@@ -7,6 +7,7 @@
 Acesse no [site](https://front-desafio-final.vercel.app/)<br>
 
 <h2>📷 Preview</h2>
+<img src="./gravacao_tela.mp4">
 
 ## Tópicos
 
@@ -63,6 +64,7 @@ Em resumo, o fluxo do processo consiste em:
 - O sistema de envio de e-mails foi realizado utilizando Simple Email Service (SES) da AWS.
 - As imagens docker de cada aplicação estão publicadas no [DockerHub](https://hub.docker.com/).
 - As aplicações foram deployadas utilizando Kubernetes.
+- O FrontEnd foi deployado na Vercel.
 
 <br/>
 <hr/>
@@ -84,18 +86,18 @@ Em resumo, o fluxo do processo consiste em:
 
 ## 🔒 Environment
 
-Por padrão, após a instalação das dependências a aplicação vem com um módulo de configuração que pode ler todas as variáveis ​​de ambiente do arquivo `.env`.
+Por padrão, após a instalação das dependências a aplicação React vem com um módulo de configuração que pode ler todas as variáveis ​​de ambiente do arquivo `.env` que possuem o prefixo REACT_APP.
 
 ```bash
 # Crie um arquivo .env usando de exemplo o arquivo .env.example
 $ cp .env.example .env
 ```
 
-| Key                     | Description    | Default Value  |
-| ----------------------- | -------------- | -------------- |
-| REACT_APP_API_ADMIN_URL | URL API ADMIN  | localhost:8080 |
-| REACT_APP_API_USER_URL  | URL API USERS  | localhost:8081 |
-| REACT_APP_API_ORDER_URL | URL API ORDERS | localhost:8082 |
+| Key                     | Description    | Default Value         |
+| ----------------------- | -------------- | --------------------- |
+| REACT_APP_API_ADMIN_URL | URL API ADMIN  | http://localhost:8080 |
+| REACT_APP_API_USER_URL  | URL API USERS  | http://localhost:8081 |
+| REACT_APP_API_ORDER_URL | URL API ORDERS | http://localhost:8082 |
 
 <br/>
 <hr/>
