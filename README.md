@@ -7,7 +7,7 @@
 Acesse no [site](https://front-desafio-final.vercel.app/)<br>
 
 <h2>📷 Preview</h2>
-<img src="./gravacao_tela.mp4">
+<img src="./src/assets/gravacao_tela.mp4">
 
 ## Tópicos
 
