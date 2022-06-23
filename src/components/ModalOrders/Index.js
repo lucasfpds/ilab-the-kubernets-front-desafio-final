@@ -10,8 +10,15 @@ import "./style.css";
 import toast from "../../helpers/toast";
 
 export default function ModalOrders(props) {
-  const { users, setOrders, setOrdersFetched, setLoading, loadingRef, admin } =
-    useGlobal();
+  const {
+    users,
+    setOrders,
+    setOrdersFetched,
+    setLoading,
+    loadingRef,
+    admin,
+    token,
+  } = useGlobal();
   const { showModal, setShowModal } = props;
 
   const [user, setUser] = useState("");
@@ -35,12 +42,16 @@ export default function ModalOrders(props) {
       } else {
         setLoading(true);
         loadingRef.current = true;
-        post("2/create-order", {
-          idAdmin: admin.id,
-          idUser: Number(user),
-          totalValue: formatCurrency(total_value),
-          description,
-        }).then((response) => {
+        post(
+          `${process.env.REACT_APP_API_ORDER_URL}2/create-order`,
+          {
+            idAdmin: admin.id,
+            idUser: Number(user),
+            totalValue: formatCurrency(total_value),
+            description,
+          },
+          token
+        ).then((response) => {
           if (response.status === "aberto") {
             setLoading(false);
             loadingRef.current = false;
@@ -50,14 +61,16 @@ export default function ModalOrders(props) {
             setUser("");
             setTotal_value("");
             setDescription("");
-            get("2/orders").then((ordersResponse) => {
-              console.log(ordersResponse);
-              setOrders(ordersResponse);
-              setOrdersFetched(ordersResponse);
-              setLoading(false);
-              loadingRef.current = false;
-              toast.messageSuccess("Pedido criado com sucesso!");
-            });
+            get(`${process.env.REACT_APP_API_ORDER_URL}2/orders`, token).then(
+              (ordersResponse) => {
+                console.log(ordersResponse);
+                setOrders(ordersResponse);
+                setOrdersFetched(ordersResponse);
+                setLoading(false);
+                loadingRef.current = false;
+                toast.messageSuccess("Pedido criado com sucesso!");
+              }
+            );
           }
         });
         setTimeout(() => {
@@ -112,7 +125,7 @@ export default function ModalOrders(props) {
 
         <div>
           <label htmlFor="description">Descrição:</label>
-          <input
+          <textarea
             id="description"
             type="text"
             value={description}

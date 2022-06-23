@@ -9,7 +9,7 @@ export default function useRequest() {
     const config = withToken ? { Authorization: `Bearer ${token}` } : {};
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BE_URL}${route}`,
+        route,
         {
           method: "GET",
           headers: {
@@ -36,7 +36,7 @@ export default function useRequest() {
     const config = withToken ? { Authorization: `Bearer ${token}` } : {};
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BE_URL}${route}`,
+        route,
         {
           method: "POST",
           headers: {
@@ -64,7 +64,7 @@ export default function useRequest() {
     const config = withToken ? { Authorization: `Bearer ${token}` } : {};
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BE_URL}${route}`,
+        route,
         {
           method: "PUT",
           headers: {
@@ -90,7 +90,7 @@ export default function useRequest() {
     const config = withToken ? { Authorization: `Bearer ${token}` } : {};
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_API_BE_URL}${route}`,
+        route,
         {
           method: "DELETE",
           headers: {

@@ -13,7 +13,8 @@ import toast from "../../helpers/toast";
 
 export default function UsersRow(props) {
   const { name, telephone, email, cpf, birthDate, id } = props;
-  const { setUserEdit, setUsers, setModalUsr, setUsersFetched } = useGlobal();
+  const { setUserEdit, setUsers, setModalUsr, setUsersFetched, token } =
+    useGlobal();
   const { deleteRequest, get } = useRequest();
 
   function handleEdit() {
@@ -31,17 +32,22 @@ export default function UsersRow(props) {
 
   function handleDelete(param) {
     if (param) {
-      deleteRequest(`1/delete/${param}`).then((response) => {
+      deleteRequest(
+        `${process.env.REACT_APP_API_USER_URL}1/delete/${param}`,
+        token
+      ).then((response) => {
         if (response) {
-          get("1/read").then((res) => {
-            if (Array.isArray(res)) {
-              setUsers(res);
-              setUsersFetched(res);
-            } else {
-              setUsers([]);
-              setUsersFetched([]);
+          get(`${process.env.REACT_APP_API_USER_URL}1/read`, token).then(
+            (res) => {
+              if (Array.isArray(res)) {
+                setUsers(res);
+                setUsersFetched(res);
+              } else {
+                setUsers([]);
+                setUsersFetched([]);
+              }
             }
-          });
+          );
           toast.messageSuccess("Usuário excluído com sucesso!");
         }
       });

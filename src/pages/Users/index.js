@@ -22,17 +22,20 @@ export default function Users() {
     setUsersFetched,
     noContent,
     setNoContent,
+    token,
   } = useGlobal();
   const { get } = useRequest();
 
   useEffect(() => {
     setNoContent("Aguarde...");
-    get("1/read").then((response) => {
-      console.log(response);
-      setUsers(response);
-      setUsersFetched(response);
-      response.length === 0 && setNoContent("Não há usuários cadastrados");
-    });
+    get(`${process.env.REACT_APP_API_USER_URL}1/read`, token).then(
+      (response) => {
+        console.log(response);
+        setUsers(response);
+        setUsersFetched(response);
+        response.length === 0 && setNoContent("Não há usuários cadastrados");
+      }
+    );
   }, []);
 
   const [searchUsers, setSearchUsers] = useState("");

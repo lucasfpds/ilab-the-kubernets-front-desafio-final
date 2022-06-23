@@ -11,7 +11,7 @@ export default function Options() {
   const { get } = useRequest();
 
   useEffect(() => {
-    get(`0/admin/${admin.id}`, token).then((res) => {
+    get(`${process.env.REACT_APP_API_ADMIN_URL}0/admin/${admin.id}`, token).then((res) => {
       if (res.name) {
         setAdmin(res);
       }

@@ -25,6 +25,7 @@ export default function Orders() {
     users,
     noContent,
     setNoContent,
+    token,
   } = useGlobal();
 
   const [showModal, setShowModal] = useState(false);
@@ -53,23 +54,25 @@ export default function Orders() {
   }, [orderSearch]);
 
   useEffect(() => {
-    get("1/read")
+    get(`${process.env.REACT_APP_API_USER_URL}1/read`, token)
       .then((usersResponse) => usersResponse)
       .then((usersResponse) => {
-        get("2/orders").then((ordersResponse) => {
-          if (Array.isArray(usersResponse)) {
-            setUsers(usersResponse);
-            setUsersFetched(usersResponse);
-          } else {
-            setUsers([]);
-            setUsersFetched([]);
+        get(`${process.env.REACT_APP_API_ORDER_URL}2/orders`, token).then(
+          (ordersResponse) => {
+            if (Array.isArray(usersResponse)) {
+              setUsers(usersResponse);
+              setUsersFetched(usersResponse);
+            } else {
+              setUsers([]);
+              setUsersFetched([]);
+            }
+            console.log(ordersResponse);
+            ordersResponse.length === 0 &&
+              setNoContent("Nenhum pedido encontrado");
+            setOrders(ordersResponse);
+            setOrdersFetched(ordersResponse);
           }
-          console.log(ordersResponse);
-          ordersResponse.length === 0 &&
-            setNoContent("Nenhum pedido encontrado");
-          setOrders(ordersResponse);
-          setOrdersFetched(ordersResponse);
-        });
+        );
       });
   }, []);
 

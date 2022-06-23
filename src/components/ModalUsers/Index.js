@@ -9,7 +9,7 @@ import toast from "../../helpers/toast";
 import "./style.css";
 
 export default function ModalUsers(props) {
-  const { userEdit, setUsers, modalUsr, setModalUsr, setUsersFetched } =
+  const { userEdit, setUsers, modalUsr, setModalUsr, setUsersFetched, token } =
     useGlobal();
   const { name, telephone, email, cpf, birthDate, id } = userEdit;
 
@@ -61,22 +61,34 @@ export default function ModalUsers(props) {
         toast.messageError("Preencha todos os campos!");
       } else {
         if (idInput) {
-          put(`1/update/${body.id}`, body, null).then((response) => {
+          put(
+            `${process.env.REACT_APP_API_USER_URL}1/update/${body.id}`,
+            body,
+            token
+          ).then((response) => {
             if (response.status) {
-              get("1/read").then((res) => {
-                setUsers(res);
-                setUsersFetched(res);
-              });
+              get(`${process.env.REACT_APP_API_USER_URL}1/read`, token).then(
+                (res) => {
+                  setUsers(res);
+                  setUsersFetched(res);
+                }
+              );
               toast.messageSuccess("Usuário atualizado com sucesso!");
             }
           });
         } else {
-          post("1/create/", body, null).then((response) => {
+          post(
+            `${process.env.REACT_APP_API_USER_URL}1/create/`,
+            body,
+            token
+          ).then((response) => {
             if (response.status) {
-              get("1/read").then((res) => {
-                setUsers(res);
-                setUsersFetched(res);
-              });
+              get(`${process.env.REACT_APP_API_USER_URL}1/read`, token).then(
+                (res) => {
+                  setUsers(res);
+                  setUsersFetched(res);
+                }
+              );
               toast.messageSuccess("Usuário criado com sucesso!");
             }
           });
