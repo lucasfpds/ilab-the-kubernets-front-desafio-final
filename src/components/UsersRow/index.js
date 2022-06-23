@@ -33,11 +33,11 @@ export default function UsersRow(props) {
   function handleDelete(param) {
     if (param) {
       deleteRequest(
-        `${process.env.REACT_APP_API_USER_URL}1/delete/${param}`,
+        `${process.env.REACT_APP_API_USER_URL}/delete/${param}`,
         token
       ).then((response) => {
         if (response) {
-          get(`${process.env.REACT_APP_API_USER_URL}1/read`, token).then(
+          get(`${process.env.REACT_APP_API_USER_URL}/read`, token).then(
             (res) => {
               if (Array.isArray(res)) {
                 setUsers(res);

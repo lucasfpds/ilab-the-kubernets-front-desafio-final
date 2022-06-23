@@ -1,23 +1,22 @@
-
 ![Logo](https://www.notion.so/image/https%3A%2F%2Fbutecotecnologico.com.br%2Fkubernetes-explicado%2Fk8s-logo.png?table=block&id=4bdd526d-997b-4b7a-aff3-60f6d830cb8e&spaceId=b5bde1f6-a69d-4d6a-ba92-e85e080fe677&width=150&height=150&userId=8a4a1998-bbe3-4ecd-8da4-81ad9f899b9c&cache=v2)
-
 
 # The Kubernetes: FrontEnd
 
 </br>
 
-Acesse no [site](https://kontacts.ml/)<br>
+Acesse no [site](https://front-desafio-final.vercel.app/)<br>
 
 <h2>📷 Preview</h2>
 
 ## Tópicos
 
-   * [Sobre o projeto](#-sobre-o-projeto)
-   * [Informações Gerais](#-informações-gerais)
-   * [Pré-requisitos](#-pré-requisitos)
-   * [Executar a aplicação](#-executar-a-aplicação)
-   * [Tecnologias](#-tecnologias)
-   * [Equipe responsável](#-equipe-responsável)
+- [Sobre o projeto](#-sobre-o-projeto)
+- [Informações Gerais](#-informações-gerais)
+- [Environment](#-environment)
+- [Pré-requisitos](#-pré-requisitos)
+- [Passos para montar o ambiente local](#-passos-para-montar-o-ambiente-local)
+- [Tecnologias](#-tecnologias)
+- [Equipe responsável](#-equipe-responsável)
 
 <br/>
 <hr/>
@@ -27,7 +26,7 @@ Acesse no [site](https://kontacts.ml/)<br>
 <p>
 O projeto tem como objetivo implementar um sistema de realização de pedidos, gerenciado por um administrador. Para o funcionamento correto da aplicação, o administrador precisa estar logado em sua conta para que o pedido seja criado. O processamento deste deve ocorrer através de um sistema de mensageria (em background), com o envio de e-mail ao usuário ao término da operação, informando que o pedido foi realizado com sucesso.
 Por fim, os pedidos devem ser armazenados em um banco de dados, possibilitando que posteriormente estes possam ser consultados.
-</p> 
+</p>
 
 Em resumo, o fluxo do processo consiste em:
 
@@ -42,43 +41,66 @@ Em resumo, o fluxo do processo consiste em:
       - O pedido é enviado para o sistema de mensageria.
       - O sistema de mensageria processa o pedido.
       - O sistema de mensageria envia um e-mail ao usuário, informado que o pedido foi realizado.
-- Independente da escolha, usuários e pedidos sempre estão sendo salvos no banco de dados.  
+- Independente da escolha, usuários e pedidos sempre estão sendo salvos no banco de dados.
 
 </br>
 
 <em>
     link para os repositórios de Back:
-    [site](https://kontacts.ml/)
+    [API Admin](https://gitlab.com/ilab-the-kubernets/admin-api)
+    [API Users](https://gitlab.com/ilab-the-kubernets/users-api)
+    [API Orders](https://gitlab.com/ilab-the-kubernets/orders-api)
+    [API Order Consomer SQS](https://gitlab.com/ilab-the-kubernets/api-order-consomer-sqs)
 </em>
 
 <br/>
 <hr/>
 
 ## 📝 Informações Gerais
+
 - A persistência dos dados foi feita no Sistema Gerenciador de Banco de Dados Postgres.
 - O sistema de mensageria foi realizado utilizando Simple Queue Service (SQS) da Amazon Web Service (AWS).
 - O sistema de envio de e-mails foi realizado utilizando Simple Email Service (SES) da AWS.
 - As imagens docker de cada aplicação estão publicadas no [DockerHub](https://hub.docker.com/).
 - As aplicações foram deployadas utilizando Kubernetes.
 
-</br>
+<br/>
 <hr/>
 
 ## Pré-requisitos
 
 - [NodeJS](https://nodejs.org/en/download/)
 
-<br>
+</br>
 
 ```bash
 #Fazer o fork do repositório para sua conta
 
 #Executar git clone do seu fork no terminal para clonar o repositório
 ```
-<br>
+
+<br/>
+<hr/>
+
+## 🔒 Environment
+
+Por padrão, após a instalação das dependências a aplicação vem com um módulo de configuração que pode ler todas as variáveis ​​de ambiente do arquivo `.env`.
+
+```bash
+# Crie um arquivo .env usando de exemplo o arquivo .env.example
+$ cp .env.example .env
+```
+
+| Key                     | Description    | Default Value  |
+| ----------------------- | -------------- | -------------- |
+| REACT_APP_API_ADMIN_URL | URL API ADMIN  | usuario        |
+| REACT_APP_API_USER_URL  | URL API USERS  | localhost      |
+| REACT_APP_API_ORDER_URL | URL API ORDERS | banco_de_dados |
+
+<br/>
+<hr/>
 
 ## Passos para montar o ambiente local
-
 
 1. Instalar o Yarn
 
@@ -108,23 +130,23 @@ yarn start
 As seguintes linguagens/tecnologias foram usadas na construção do projeto:
 
 <div>
-  <img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" target="_blank">
   
-  <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white" target="_blank">
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white
+" target="_blank">
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white
+" target="_blank">
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" target="_blank">
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+" target="_blank">
+  <img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white
+" target="_blank">
+  <img src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white
+" target="_blank">
+  <img src="https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white
+" target="_blank">
+  <img src="https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E
+" target="_blank">
   
-  <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white" target="_blank">
-
-  <img src="https://img.shields.io/badge/Thymeleaf-%23005C0F.svg?style=for-the-badge&logo=Thymeleaf&logoColor=white" target="_blank">
-  
-  <img src="https://img.shields.io/badge/Amazon_AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white" target="_blank">
-   
-  <img src="https://img.shields.io/badge/Ansible-000000?style=for-the-badge&logo=ansible&logoColor=white" target="_blank">
-   
-  <img src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white" target="_blank">
-   
-  <img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white" target="_blank">
-   
-  <img src="https://img.shields.io/badge/kubernetes-326ce5.svg?&style=for-the-badge&logo=kubernetes&logoColor=white" target="_blank">
 </div>
 
 <br/>
@@ -159,4 +181,3 @@ As seguintes ferrramentas foram utilizadas no projeto (clique nos ícones para a
 **Rebeca Victoria dos Santos Ferreira** - [GitLab](https://gitlab.com/rvsfrebeca1) [Linkedin](https://www.linkedin.com/in/rebecaferreirajs/)
 
 ---
-

@@ -62,12 +62,12 @@ export default function ModalUsers(props) {
       } else {
         if (idInput) {
           put(
-            `${process.env.REACT_APP_API_USER_URL}1/update/${body.id}`,
+            `${process.env.REACT_APP_API_USER_URL}/update/${body.id}`,
             body,
             token
           ).then((response) => {
             if (response.status) {
-              get(`${process.env.REACT_APP_API_USER_URL}1/read`, token).then(
+              get(`${process.env.REACT_APP_API_USER_URL}/read`, token).then(
                 (res) => {
                   setUsers(res);
                   setUsersFetched(res);
@@ -78,12 +78,12 @@ export default function ModalUsers(props) {
           });
         } else {
           post(
-            `${process.env.REACT_APP_API_USER_URL}1/create/`,
+            `${process.env.REACT_APP_API_USER_URL}/create/`,
             body,
             token
           ).then((response) => {
             if (response.status) {
-              get(`${process.env.REACT_APP_API_USER_URL}1/read`, token).then(
+              get(`${process.env.REACT_APP_API_USER_URL}/read`, token).then(
                 (res) => {
                   setUsers(res);
                   setUsersFetched(res);

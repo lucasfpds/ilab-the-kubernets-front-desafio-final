@@ -45,15 +45,17 @@ export default function SignIn() {
     if (!values.password || !email) {
       return toast.messageError("Preencha todos os campos");
     }
-    await post(`${process.env.REACT_APP_API_ADMIN_URL}0/login`, { email, password: values.password }, false).then(
-      (response) => {
-        if (response.token) {
-          setToken(response.token);
-          setAdmin({ id: response.id, name: "" });
-          history.push("/options");
-        }
+    await post(
+      `${process.env.REACT_APP_API_ADMIN_URL}/login`,
+      { email, password: values.password },
+      false
+    ).then((response) => {
+      if (response.token) {
+        setToken(response.token);
+        setAdmin({ id: response.id, name: "" });
+        history.push("/options");
       }
-    );
+    });
   }
   return (
     <div className="container-login">

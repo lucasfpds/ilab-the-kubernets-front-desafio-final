@@ -43,7 +43,7 @@ export default function ModalOrders(props) {
         setLoading(true);
         loadingRef.current = true;
         post(
-          `${process.env.REACT_APP_API_ORDER_URL}2/create-order`,
+          `${process.env.REACT_APP_API_ORDER_URL}/create-order`,
           {
             idAdmin: admin.id,
             idUser: Number(user),
@@ -61,7 +61,7 @@ export default function ModalOrders(props) {
             setUser("");
             setTotal_value("");
             setDescription("");
-            get(`${process.env.REACT_APP_API_ORDER_URL}2/orders`, token).then(
+            get(`${process.env.REACT_APP_API_ORDER_URL}/orders`, token).then(
               (ordersResponse) => {
                 console.log(ordersResponse);
                 setOrders(ordersResponse);

@@ -73,7 +73,11 @@ export default function SignUp() {
     };
     console.log(body);
     // eslint-disable-next-line no-unused-vars
-    const result = await post(`${process.env.REACT_APP_API_ADMIN_URL}0/create`, body, false).then((res) => {
+    const result = await post(
+      `${process.env.REACT_APP_API_ADMIN_URL}/create`,
+      body,
+      false
+    ).then((res) => {
       if (res.status) {
         toast.messageSuccess("Usuário criado com sucesso");
         history.push("/login");

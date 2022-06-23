@@ -28,7 +28,7 @@ export default function Users() {
 
   useEffect(() => {
     setNoContent("Aguarde...");
-    get(`${process.env.REACT_APP_API_USER_URL}1/read`, token).then(
+    get(`${process.env.REACT_APP_API_USER_URL}/read`, token).then(
       (response) => {
         console.log(response);
         setUsers(response);

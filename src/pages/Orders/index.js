@@ -54,10 +54,10 @@ export default function Orders() {
   }, [orderSearch]);
 
   useEffect(() => {
-    get(`${process.env.REACT_APP_API_USER_URL}1/read`, token)
+    get(`${process.env.REACT_APP_API_USER_URL}/read`, token)
       .then((usersResponse) => usersResponse)
       .then((usersResponse) => {
-        get(`${process.env.REACT_APP_API_ORDER_URL}2/orders`, token).then(
+        get(`${process.env.REACT_APP_API_ORDER_URL}/orders`, token).then(
           (ordersResponse) => {
             if (Array.isArray(usersResponse)) {
               setUsers(usersResponse);

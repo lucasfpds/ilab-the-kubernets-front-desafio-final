@@ -11,11 +11,13 @@ export default function Options() {
   const { get } = useRequest();
 
   useEffect(() => {
-    get(`${process.env.REACT_APP_API_ADMIN_URL}0/admin/${admin.id}`, token).then((res) => {
-      if (res.name) {
-        setAdmin(res);
+    get(`${process.env.REACT_APP_API_ADMIN_URL}/admin/${admin.id}`, token).then(
+      (res) => {
+        if (res.name) {
+          setAdmin(res);
+        }
       }
-    });
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
