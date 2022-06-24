@@ -20,21 +20,28 @@ export default function Users() {
     setModalUsr,
     usersFetched,
     setUsersFetched,
+    noContent,
+    setNoContent,
+    token,
   } = useGlobal();
   const { get } = useRequest();
 
   useEffect(() => {
-    get("0/read").then((response) => {
-      console.log(response);
-      setUsers(response);
-      setUsersFetched(response);
-    });
+    setNoContent("Aguarde...");
+    get(`${process.env.REACT_APP_API_USER_URL}/read`, token).then(
+      (response) => {
+        console.log(response);
+        setUsers(response);
+        setUsersFetched(response);
+        response.length === 0 && setNoContent("Não há usuários cadastrados");
+      }
+    );
   }, []);
 
   const [searchUsers, setSearchUsers] = useState("");
 
   function handleSearch(input) {
-    const value = input;
+    const value = input.toLowerCase();
     const usersFiltered = usersFetched.filter(
       (u) =>
         u.name.toLowerCase().includes(value.toLowerCase()) ||
@@ -99,7 +106,7 @@ export default function Users() {
           ))}
         </div>
       ) : (
-        <h1>Não há usuários cadastrados</h1>
+        <h1>{noContent}</h1>
       )}
       <Button
         onClickProp={() => history.push("/options")}

@@ -10,7 +10,15 @@ import "./style.css";
 import toast from "../../helpers/toast";
 
 export default function ModalOrders(props) {
-  const { users, setOrders, setOrdersFetched } = useGlobal();
+  const {
+    users,
+    setOrders,
+    setOrdersFetched,
+    setLoading,
+    loadingRef,
+    admin,
+    token,
+  } = useGlobal();
   const { showModal, setShowModal } = props;
 
   const [user, setUser] = useState("");
@@ -32,24 +40,46 @@ export default function ModalOrders(props) {
       } else if (isNaN(formatCurrency(total_value))) {
         toast.messageError("Preencha o valor corretamente!");
       } else {
-        post("1/create-order", {
-          idUser: Number(user),
-          totalValue: formatCurrency(total_value),
-          description,
-        }).then((response) => {
-          if (response) {
-            toast.messageSuccess("Pedido criado com sucesso!");
+        setLoading(true);
+        loadingRef.current = true;
+        post(
+          `${process.env.REACT_APP_API_ORDER_URL}/create-order`,
+          {
+            idAdmin: admin.id,
+            idUser: Number(user),
+            totalValue: formatCurrency(total_value),
+            description,
+          },
+          token
+        ).then((response) => {
+          if (response.status === "aberto") {
+            setLoading(false);
+            loadingRef.current = false;
+            toast.messageError("Erro ao criar pedido! TENTE NOVAMENTE!");
+          } else if (response.status) {
             setShowModal(false);
             setUser("");
             setTotal_value("");
             setDescription("");
-            get("1/orders").then((ordersResponse) => {
-              console.log(ordersResponse);
-              setOrders(ordersResponse);
-              setOrdersFetched(ordersResponse);
-            });
+            get(`${process.env.REACT_APP_API_ORDER_URL}/orders`, token).then(
+              (ordersResponse) => {
+                console.log(ordersResponse);
+                setOrders(ordersResponse);
+                setOrdersFetched(ordersResponse);
+                setLoading(false);
+                loadingRef.current = false;
+                toast.messageSuccess("Pedido criado com sucesso!");
+              }
+            );
           }
         });
+        setTimeout(() => {
+          if (loadingRef.current) {
+            setLoading(false);
+            loadingRef.current = false;
+            toast.messageError("Erro ao criar pedido!");
+          }
+        }, 30000);
       }
     } else {
       setUser("");
@@ -95,7 +125,7 @@ export default function ModalOrders(props) {
 
         <div>
           <label htmlFor="description">Descrição:</label>
-          <input
+          <textarea
             id="description"
             type="text"
             value={description}
