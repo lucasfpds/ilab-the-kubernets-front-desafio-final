@@ -30,7 +30,6 @@ export default function Users() {
     setNoContent("Aguarde...");
     get(`${process.env.REACT_APP_API_USER_URL}/read`, token).then(
       (response) => {
-        console.log(response);
         setUsers(response);
         setUsersFetched(response);
         response.length === 0 && setNoContent("Não há usuários cadastrados");
@@ -51,8 +50,12 @@ export default function Users() {
         u.birthDate.includes(value) ||
         String(u.id).includes(value)
     );
-    console.log(usersFiltered);
     setUsers(usersFiltered);
+    if (usersFiltered.length === 0 && !!input) {
+      setNoContent("Nenhum Usuário Encontrado");
+    } else if (usersFiltered.length === 0 && !input) {
+      setNoContent("Aguarde...");
+    }
   }
 
   useEffect(() => {

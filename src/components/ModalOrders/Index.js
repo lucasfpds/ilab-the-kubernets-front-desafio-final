@@ -63,7 +63,6 @@ export default function ModalOrders(props) {
             setDescription("");
             get(`${process.env.REACT_APP_API_ORDER_URL}/orders`, token).then(
               (ordersResponse) => {
-                console.log(ordersResponse);
                 setOrders(ordersResponse);
                 setOrdersFetched(ordersResponse);
                 setLoading(false);

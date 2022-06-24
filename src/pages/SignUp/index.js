@@ -71,7 +71,6 @@ export default function SignUp() {
       name,
       password: values.password,
     };
-    console.log(body);
     // eslint-disable-next-line no-unused-vars
     const result = await post(
       `${process.env.REACT_APP_API_ADMIN_URL}/create`,
