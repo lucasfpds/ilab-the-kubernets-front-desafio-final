@@ -44,8 +44,12 @@ export default function Orders() {
         findUser(o.idUser).toLowerCase().includes(value) ||
         String(o.idOrder).includes(value)
     );
-    console.log(ordersFiltered);
     setOrders(ordersFiltered);
+    if (ordersFiltered.length === 0 && !!input) {
+      setNoContent("Nenhum Pedido Encontrado");
+    } else if (ordersFiltered.length === 0 && !input) {
+      setNoContent("Aguarde...");
+    }
   }
 
   useEffect(() => {
@@ -66,7 +70,6 @@ export default function Orders() {
               setUsers([]);
               setUsersFetched([]);
             }
-            console.log(ordersResponse);
             ordersResponse.length === 0 &&
               setNoContent("Nenhum pedido encontrado");
             setOrders(ordersResponse);
@@ -94,10 +97,16 @@ export default function Orders() {
     }/${dateFormat.getFullYear()}`;
   }
 
-  function newTotalValue(total_value) {
-    const formated = String(total_value / 100).replace(".", ",");
+  const newTotalValue = (total_value) => {
+    if (isNaN(Number(total_value))) {
+      return "";
+    }
+    const newValue = String(total_value / 100);
+    const formated = newValue.includes(".")
+      ? newValue.replace(".", ",")
+      : `${newValue},00`;
     return formated.split(",")[1].length === 1 ? `${formated}0` : formated;
-  }
+  };
 
   return (
     <>

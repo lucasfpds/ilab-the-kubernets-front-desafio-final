@@ -75,7 +75,6 @@ export default function useRequest() {
         }
       );
       const dataObj = await response.json();
-      console.log(dataObj);
       if (!response.ok) {
         throw new Error(dataObj.message);
       }

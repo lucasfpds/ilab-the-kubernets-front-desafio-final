@@ -49,7 +49,6 @@ export default function ModalUsers(props) {
   };
 
   function handleClick(params) {
-    console.log(body);
     if (params === "confirm") {
       if (
         !nameInput ||

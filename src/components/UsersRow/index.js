@@ -52,7 +52,6 @@ export default function UsersRow(props) {
         }
       });
     }
-    console.log(param);
     setModalDelete(false);
   }
   return (
